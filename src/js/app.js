@@ -2,12 +2,12 @@ export default function orderByProps(obj, order) {
   const inputObject = { ...obj };
   const result = [];
 
-  order.forEach((item) => {
-    for (const prop in inputObject) {
-      if (item === prop) {
-        result.push({ key: prop, value: obj[prop] });
-        delete inputObject[prop];
-      }
+  order.forEach((prop) => {
+    if (Object.prototype.hasOwnProperty.call(inputObject, prop)) {
+      result.push({ key: prop, value: obj[prop] });
+      delete inputObject[prop];
+    } else {
+      throw new Error(`Пераметр ${prop} не существет`);
     }
   });
 

@@ -31,3 +31,13 @@ test('function "orderByProps" should sort', () => {
   const received = orderByProps(inputObject, inputOrder);
   expect(received).toEqual(expected);
 });
+
+test('function "orderByProps" should throw error', () => {
+  const inputObject = {
+    name: 'мечник', health: 10, level: 2, attack: 80, defence: 40,
+  };
+  const inputOrder = ['blah-blah', 'level', 'health', 'defence', 'attack'];
+  expect(() => {
+    orderByProps(inputObject, inputOrder);
+  }).toThrowError(new Error('Пераметр blah-blah не существет'));
+});
